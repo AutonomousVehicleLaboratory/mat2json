@@ -13,6 +13,7 @@ Mat Label Data            |  Mat Label Definition
 1. MATLAB R2022a or newer
 
 ## File Structure
+```
 Root:
 ├───GTL_Data
 │     ├───groundTruthLabelingSession.mat
@@ -46,6 +47,7 @@ Root:
 ├───saveAsJson.m
 │
 └───README.md
+```s
 
 ## How to Run the Script
 1. Export the annotated data as a .mat file from the Ground Truth Labeler App.
