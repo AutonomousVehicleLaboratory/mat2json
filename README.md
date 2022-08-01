@@ -47,7 +47,7 @@ Root:
 ├───saveAsJson.m
 │
 └───README.md
-```s
+```
 
 ## How to Run the Script
 1. Export the annotated data as a .mat file from the Ground Truth Labeler App.
