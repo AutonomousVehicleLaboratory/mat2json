@@ -1,0 +1,69 @@
+clear all
+clc
+
+%% Extract data from the ground truth variable, gTruth (for LiDAR Labeler).
+% Label definitions, label_def:
+% 1.) Name / ID
+% 2.) Type (Cuboid)
+% 3.) Label Color (Normalized RGB array)
+% 4.) Group (Truck, Van, Vehicle. etc.)
+% 5.) Descroption
+%label_def = jsonencode(gTruth.LabelDefinitions);
+% Label data, label_data:
+% 1.) Timestamps
+% 2.) Vehicle ID (Number of columns increases as the number of labeled
+%     objects increases)
+%     a.) [x_center, y_center, z_center, x_len, y_len, z_len, x-rot, y-rot,
+%          z_rot] (LiDAR Frame)
+%          i.) xctr, yctr, and zctr specify the center of the cuboid.
+%          ii.) xlen, ylen, and zlen specify the length of the cuboid along 
+%               the x-axis, y-axis, and z-axis, respectively, before 
+%               rotation has been applied.
+%          iii.) xrot, yrot, and zrot specify the rotation angles for the 
+%                cuboid along the x-axis, y-axis, and z-axis, respectively. 
+%                These angles are clockwise-positive when looking in the 
+%                forward direction of their corresponding axes.
+%          iv.) Link: https://www.mathworks.com/help/lidar/ref/groundtruthlidar.html
+%a_Table = timetable2table(gTruth.LabelData);        % Convert the data-type from timetable to table
+%a_Table.Time = time2num(a_Table.Time,"seconds");    % Convert the Time's Duration array to an array of numbers
+%label_data = jsonencode(a_Table);
+%struct_label_data = jsondecode(label_data);
+
+%% Load ground truth variable from Ground Truth Labeler.
+%gTruth_struct = load("./LL_Data/gTruth_LL.mat"); (for LiDAR Labeler)
+gTruth_struct = load("./GTL_Data/gTruth_GTL.mat");
+gTruth = gTruth_struct.gTruth;
+
+%% Extract data from the ground truth variable, gTruth (for Ground Truth Labeler).
+% Label definitions, label_def:
+% 1.) Name / ID
+% 2.) Type (Cuboid)
+% 3.) Label Color (Normalized RGB array)
+% 4.) Group (Truck, Van, Vehicle. etc.)
+% 5.) Descroption
+label_def = jsonencode(gTruth.LabelDefinitions);
+% Label data, label_data:
+% 1.) Timestamps
+% 2.) Vehicle ID (Number of columns increases as the number of labeled
+%     objects increases)
+%     a.) [x_center, y_center, z_center, x_len, y_len, z_len, x-rot, y-rot,
+%          z_rot] (LiDAR Frame)
+%          i.) xctr, yctr, and zctr specify the center of the cuboid.
+%          ii.) xlen, ylen, and zlen specify the length of the cuboid along 
+%               the x-axis, y-axis, and z-axis, respectively, before 
+%               rotation has been applied.
+%          iii.) xrot, yrot, and zrot specify the rotation angles for the 
+%                cuboid along the x-axis, y-axis, and z-axis, respectively. 
+%                These angles are clockwise-positive when looking in the 
+%                forward direction of their corresponding axes.
+%          iv.) Link: https://www.mathworks.com/help/lidar/ref/groundtruthlidar.html
+a_Table = timetable2table(gTruth.ROILabelData.points_raw);        % Convert the data-type from timetable to table
+a_Table.Time = time2num(a_Table.Time,"seconds");    % Convert the Time's Duration array to an array of numbers
+label_data = jsonencode(a_Table);
+%struct_label_data = jsondecode(label_data);
+
+%% Export to json
+saveAsJson("./savedData/label_def_GTL", label_def)
+saveAsJson("./savedData/label_data_GTL", label_data)
+
+

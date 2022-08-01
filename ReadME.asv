@@ -1,0 +1,4 @@
+1.) Export the annotated data as a .mat file from the Ground Truth Labeler App.
+2.) Save the file to the GTL_Data folder.
+3.) Open the "mat2json.m".
+4.) Replace the saved file name in Line 6 in the mat2json.m (i.e., gTruth_struct = load("./GTL_Data/gTruth_GTL.mat");) 
