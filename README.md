@@ -11,6 +11,7 @@ Mat Label Data            |  Mat Label Definition
 
 ## Requirements
 1. MATLAB R2022a or newer
+2. MATLAB Ground Truth Labeler App
 
 ## File Structure
 ```
@@ -50,6 +51,7 @@ Root:
 ```
 
 ## How to Run the Script
+0. git clone the repository.
 1. Export the annotated data as a .mat file from the Ground Truth Labeler App.
 2. Save the file to the GTL_Data folder.
 3. Open the "mat2json.m".
